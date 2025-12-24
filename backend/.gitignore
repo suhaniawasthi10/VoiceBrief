@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+tmp/
+uploads/

@@ -1,0 +1,36 @@
+{
+    "name": "voicebrief-backend",
+    "version": "1.0.0",
+    "description": "VoiceBrief - AI Voice Note Summarizer Backend",
+    "main": "src/server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node src/server.js",
+        "dev": "nodemon src/server.js"
+    },
+    "keywords": [
+        "voice",
+        "ai",
+        "summarizer",
+        "deepgram",
+        "gemini"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@google/generative-ai": "^0.24.1",
+        "assemblyai": "^4.22.1",
+        "bcryptjs": "^3.0.3",
+        "cloudinary": "^2.8.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "groq-sdk": "^0.37.0",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^9.0.2",
+        "multer": "^2.0.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
+}
