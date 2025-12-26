@@ -53,6 +53,18 @@ export const dashboardStyles: { [key: string]: React.CSSProperties } = {
         alignItems: 'center',
         gap: '1rem',
     },
+    avatar: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '50%',
+        background: 'linear-gradient(135deg, #14b8a6, #0d9488)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff',
+        fontWeight: 600,
+        fontSize: '0.9375rem',
+    },
     userName: {
         color: 'var(--color-text-secondary)',
         fontSize: '0.9375rem',
@@ -73,7 +85,7 @@ export const dashboardStyles: { [key: string]: React.CSSProperties } = {
         padding: '3rem 2rem',
     },
     content: {
-        maxWidth: '800px',
+        maxWidth: '1000px',
         margin: '0 auto',
     },
 
@@ -88,6 +100,7 @@ export const dashboardStyles: { [key: string]: React.CSSProperties } = {
         color: 'var(--color-text-primary)',
         marginBottom: '1rem',
         lineHeight: 1.2,
+        whiteSpace: 'nowrap',
     },
     heroSubtitle: {
         fontSize: '1rem',
@@ -109,6 +122,10 @@ export const dashboardStyles: { [key: string]: React.CSSProperties } = {
         borderRadius: '16px',
         padding: '2rem',
         textAlign: 'center' as const,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        minHeight: '320px',
     },
     flashcardIcon: {
         width: '64px',
@@ -130,6 +147,10 @@ export const dashboardStyles: { [key: string]: React.CSSProperties } = {
         fontSize: '0.875rem',
         color: 'var(--color-text-secondary)',
         marginBottom: '1.5rem',
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
     },
 
     // Buttons

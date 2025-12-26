@@ -379,13 +379,22 @@ input:-webkit-autofill:focus {
 }
 
 /* Button Hover Effects */
-.btn-glow:hover {
+.btn-primary-hover:hover {
+    opacity: 0.9;
     transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(20, 184, 166, 0.3);
 }
 
-.btn-glow:active {
+.btn-primary-hover:active {
     transform: translateY(0);
+}
+
+.btn-secondary-hover:hover {
+    border-color: var(--color-accent);
+    background-color: rgba(20, 184, 166, 0.05);
+}
+
+.btn-secondary-hover:active {
+    transform: scale(0.98);
 }
 
 /* Card Hover Effect */

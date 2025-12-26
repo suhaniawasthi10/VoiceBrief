@@ -25,7 +25,9 @@ export default function Header({ username, onLogout }: HeaderProps) {
                     <span style={styles.logoText}>VoiceBrief</span>
                 </div>
                 <div style={styles.userSection}>
-                    <span style={styles.userName}>{username}</span>
+                    <div style={styles.avatar}>
+                        {username.charAt(0).toUpperCase()}
+                    </div>
                     <button onClick={onLogout} style={styles.logoutBtn}>
                         Log out
                     </button>

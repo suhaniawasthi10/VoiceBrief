@@ -67,7 +67,7 @@ export const markAsProcessing = async (jobId) => {
  * 
  * @param {string} jobId - The job's MongoDB ObjectId
  * @param {string} transcript - Full transcript from Deepgram
- * @param {Object} summary - Structured summary from Gemini
+ * @param {Object} summary - Structured summary from Groq
  * @returns {Promise<AudioJob>} Updated job document
  */
 export const markAsCompleted = async (jobId, transcript, summary) => {

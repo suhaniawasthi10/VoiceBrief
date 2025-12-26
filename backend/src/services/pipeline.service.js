@@ -7,7 +7,7 @@ import { summarizeTranscript } from './llm.service.js';
  * 
  * Orchestrates the full audio processing workflow:
  *   1. ASR: Transcribe audio (AssemblyAI)
- *   2. LLM: Summarize transcript (Gemini)
+ *   2. LLM: Summarize transcript (Groq)
  *   3. Store: Save results to database
  * 
  * This runs asynchronously after Cloudinary upload.

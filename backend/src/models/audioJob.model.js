@@ -50,7 +50,7 @@ const audioJobSchema = new mongoose.Schema(
             default: null,
         },
 
-        // Structured summary from Gemini LLM (Phase 6)
+        // Structured summary from Groq LLM
         summary: {
             title: { type: String, default: null },
             summary: { type: String, default: null },

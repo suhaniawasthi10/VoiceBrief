@@ -28,12 +28,7 @@ const config = {
         apiKey: process.env.ASSEMBLYAI_API_KEY,
     },
 
-    // Gemini (LLM Summarization) - backup
-    gemini: {
-        apiKey: process.env.GEMINI_API_KEY,
-    },
-
-    // Groq (LLM Summarization) - primary
+    // Groq (LLM Summarization)
     groq: {
         apiKey: process.env.GROQ_API_KEY,
     },

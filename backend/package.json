@@ -12,13 +12,12 @@
         "voice",
         "ai",
         "summarizer",
-        "deepgram",
-        "gemini"
+        "assemblyai",
+        "groq"
     ],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@google/generative-ai": "^0.24.1",
         "assemblyai": "^4.22.1",
         "bcryptjs": "^3.0.3",
         "cloudinary": "^2.8.0",

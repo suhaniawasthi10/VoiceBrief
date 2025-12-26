@@ -28,6 +28,12 @@ export default function Login() {
     return (
         <div style={styles.container}>
             <div style={styles.card}>
+                <Link to="/" style={styles.backLink}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back
+                </Link>
                 <div style={styles.header}>
                     <Link to="/" style={styles.logo}>
                         <span style={styles.logoIcon}>
@@ -195,5 +201,15 @@ const styles: { [key: string]: React.CSSProperties } = {
         color: '#14b8a6',
         fontWeight: 500,
         textDecoration: 'none',
+    },
+    backLink: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        color: 'var(--color-text-secondary)',
+        textDecoration: 'none',
+        fontSize: '0.875rem',
+        marginBottom: '1.5rem',
+        transition: 'color 0.2s',
     },
 };

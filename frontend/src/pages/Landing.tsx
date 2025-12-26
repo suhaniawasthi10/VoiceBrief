@@ -56,7 +56,7 @@ export default function Landing() {
                         <button onClick={() => navigate('/login')} style={styles.loginBtn}>
                             Log In
                         </button>
-                        <button onClick={() => navigate('/signup')} style={styles.signupBtn}>
+                        <button onClick={() => navigate('/signup')} style={styles.signupBtn} className="btn-primary-hover">
                             Get Started
                         </button>
                     </div>
@@ -76,16 +76,22 @@ export default function Landing() {
                         action items, and insights in seconds.
                     </p>
                     <div style={styles.heroCta}>
-                        <button onClick={() => navigate('/signup')} style={styles.primaryBtn}>
-                            Start Free Trial →
+                        <button onClick={() => navigate('/signup')} style={styles.primaryBtn} className="btn-primary-hover">
+                            Get Started →
                         </button>
-                        <button style={styles.secondaryBtn}>Watch Demo</button>
+                        <button
+                            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                            style={styles.secondaryBtn}
+                            className="btn-secondary-hover"
+                        >
+                            Learn More
+                        </button>
                     </div>
                 </div>
             </section>
 
             {/* Features Section */}
-            <section style={styles.features}>
+            <section id="features" style={styles.features}>
                 <div style={styles.featuresContainer}>
                     <h2 style={styles.featuresTitle}>
                         Everything you need to manage voice notes
@@ -110,8 +116,8 @@ export default function Landing() {
                         <p style={styles.ctaSubtitle}>
                             Join thousands of professionals who use VoiceBrief to stay organized and productive.
                         </p>
-                        <button onClick={() => navigate('/signup')} style={styles.ctaBtn}>
-                            Start Free Trial →
+                        <button onClick={() => navigate('/signup')} style={styles.ctaBtn} className="btn-primary-hover">
+                            Get Started →
                         </button>
                     </div>
                 </div>
@@ -183,8 +189,7 @@ const styles: { [key: string]: React.CSSProperties } = {
         fontSize: '0.9375rem',
         fontWeight: 600,
         borderRadius: '10px',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        boxShadow: '0 4px 15px rgba(20, 184, 166, 0.3)',
+        transition: 'transform 0.2s',
     },
 
     // Hero
@@ -237,8 +242,7 @@ const styles: { [key: string]: React.CSSProperties } = {
         fontSize: '1rem',
         fontWeight: 600,
         borderRadius: '12px',
-        boxShadow: '0 8px 30px rgba(20, 184, 166, 0.35)',
-        transition: 'transform 0.2s, box-shadow 0.2s',
+        transition: 'transform 0.2s',
     },
     secondaryBtn: {
         padding: '1rem 2rem',
@@ -339,7 +343,6 @@ const styles: { [key: string]: React.CSSProperties } = {
         fontSize: '1rem',
         fontWeight: 600,
         borderRadius: '12px',
-        boxShadow: '0 8px 30px rgba(20, 184, 166, 0.35)',
         transition: 'transform 0.2s',
     },
 
