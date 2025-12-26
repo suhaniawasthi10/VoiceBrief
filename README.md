@@ -1,4 +1,4 @@
-# 🎙️ VoiceBrief
+# VoiceBrief
 
 **AI-powered voice note summarizer** — Record or upload audio, get instant transcripts with key points and action items.
 
@@ -7,17 +7,17 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)
 
-## ✨ Features
+## Features
 
-- 🎤 **Record Voice Notes** — Record directly in browser with real-time waveform visualization
-- 📤 **Upload Audio Files** — Support for MP3, WAV, M4A, OGG, WebM (up to 50MB)
-- 🤖 **AI Transcription** — Accurate speech-to-text using AssemblyAI
-- 📝 **Smart Summaries** — Structured summaries with key points and action items using Groq
-- ⚡ **Real-time Updates** — Live status polling during processing
-- 🌙 **Modern Dark UI** — Beautiful glassmorphism design with teal accents
-- 🔐 **User Authentication** — JWT-based auth with secure password hashing
+-  **Record Voice Notes** — Record directly in browser with real-time waveform visualization
+-  **Upload Audio Files** — Support for MP3, WAV, M4A, OGG, WebM (up to 50MB)
+-  **AI Transcription** — Accurate speech-to-text using AssemblyAI
+-  **Smart Summaries** — Structured summaries with key points and action items using Groq
+-  **Real-time Updates** — Live status polling during processing
+-  **Modern Dark UI** — Beautiful glassmorphism design with teal accents
+-  **User Authentication** — JWT-based auth with secure password hashing
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - React 19 + TypeScript
@@ -60,7 +60,7 @@ VoiceBrief/
 └── README.md
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -118,7 +118,7 @@ ASSEMBLYAI_API_KEY=your_assemblyai_key
 GROQ_API_KEY=your_groq_key
 ```
 
-## 📡 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -130,7 +130,7 @@ GROQ_API_KEY=your_groq_key
 | GET | `/api/audio/jobs/:id/result` | Get full result |
 | DELETE | `/api/audio/jobs/:id` | Delete a job |
 
-## 🔄 Processing Pipeline
+##  Processing Pipeline
 
 ```
 Upload → Cloudinary → AssemblyAI (ASR) → Groq (LLM) → MongoDB
@@ -142,10 +142,4 @@ Upload → Cloudinary → AssemblyAI (ASR) → Groq (LLM) → MongoDB
 4. Groq generates structured summary
 5. Results saved and returned to user
 
-## 📄 License
 
-MIT
-
----
-
-Built with ❤️ by [Suhani Awasthi](https://github.com/suhaniawasthi10)
