@@ -190,11 +190,15 @@ export const getJobResult = async (req, res, next) => {
 export const listJobs = async (req, res, next) => {
     try {
         const limit = parseInt(req.query.limit) || 20;
-        const jobs = await audioService.getJobsByUserId(req.user.id, limit);
+        const page = parseInt(req.query.page) || 1;
+        const result = await audioService.getJobsByUserId(req.user.id, page, limit);
 
         res.status(200).json({
-            count: jobs.length,
-            jobs: jobs.map((job) => ({
+            count: result.jobs.length,
+            total: result.total,
+            page: result.page,
+            totalPages: result.totalPages,
+            jobs: result.jobs.map((job) => ({
                 jobId: job._id,
                 status: job.status,
                 originalFilename: job.originalFilename,
