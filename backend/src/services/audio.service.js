@@ -117,6 +117,7 @@ export const getJobById = async (jobId, userId) => {
     return job;
 };
 
+
 /**
  * Get all jobs for a user (sorted by newest first) with pagination
  * 
