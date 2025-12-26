@@ -119,7 +119,8 @@ export const getJobById = async (jobId, userId) => {
 
 
 /**
- * Get all jobs for a user (sorted by newest first) with pagination
+ * Get all jobs for a user (sorted by newe
+ * st first) with pagination
  * 
  * @param {string} userId - The user's MongoDB ObjectId
  * @param {number} page - Page number (1-indexed, default: 1)
