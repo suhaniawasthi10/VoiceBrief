@@ -3,7 +3,7 @@ module.exports = {
         {
             name: 'voicebrief-api',
             script: './backend/src/server.js',
-            cwd: '/var/www/html/VoiceBrief',
+            cwd: '/home/ubuntu/var/www/html/VoiceBrief',
             env: {
                 NODE_ENV: 'production',
                 PORT: 3000
