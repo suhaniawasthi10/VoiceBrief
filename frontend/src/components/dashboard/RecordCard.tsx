@@ -1,11 +1,13 @@
 import { dashboardStyles as styles } from './styles';
 import { formatDuration } from '../../hooks/useRecorder';
+import UploadProgressBar from './UploadProgressBar';
 
 interface RecordCardProps {
     isRecording: boolean;
     audioBlob: Blob | null;
     duration: number;
     isUploading: boolean;
+    uploadProgress: number;
     onStartRecording: () => void;
     onStopRecording: () => void;
     onSendRecording: () => void;
@@ -20,15 +22,16 @@ export default function RecordCard({
     audioBlob,
     duration,
     isUploading,
+    uploadProgress,
     onStartRecording,
     onStopRecording,
     onSendRecording,
     onDiscardRecording,
 }: RecordCardProps) {
     return (
-        <div style={styles.flashcard} className="glass-card card-hover">
+        <div style={styles.flashcard}>
             <div style={styles.flashcardIcon}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" strokeWidth="2">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
                     <line x1="12" y1="19" x2="12" y2="23" />
@@ -57,24 +60,25 @@ export default function RecordCard({
                         <div className="waveform-bar"></div>
                         <div className="waveform-bar"></div>
                     </div>
-                    <span style={styles.recordingTime}>{formatDuration(duration)}</span>
+                    <span style={styles.recordingTime}>REC {formatDuration(duration)}</span>
                     <button onClick={onStopRecording} style={styles.stopBtn}>
                         Stop
                     </button>
                 </div>
             ) : (
                 <div style={styles.recordedBox}>
-                    <span>✅ {formatDuration(duration)}</span>
+                    <span>Recorded · {formatDuration(duration)}</span>
                     <button
                         onClick={onSendRecording}
                         disabled={isUploading}
                         style={styles.primaryButton}
                     >
-                        {isUploading ? 'Sending...' : 'Send'}
+                        {isUploading ? `Sending... ${uploadProgress}%` : 'Send'}
                     </button>
                     <button onClick={onDiscardRecording} style={styles.discardBtn}>
                         ✕
                     </button>
+                    {isUploading && <UploadProgressBar percent={uploadProgress} />}
                 </div>
             )}
         </div>

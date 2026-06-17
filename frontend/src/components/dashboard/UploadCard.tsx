@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { dashboardStyles as styles, validateAudioFile, FILE_VALIDATION } from './styles';
+import UploadProgressBar from './UploadProgressBar';
 
 interface UploadCardProps {
     isUploading: boolean;
+    uploadProgress: number;
     isRecording: boolean;
     onFileSelect: (file: File) => void;
     onValidationError: (error: string) => void;
@@ -13,6 +15,7 @@ interface UploadCardProps {
  */
 export default function UploadCard({
     isUploading,
+    uploadProgress,
     isRecording,
     onFileSelect,
     onValidationError,
@@ -43,9 +46,9 @@ export default function UploadCard({
     };
 
     return (
-        <div style={styles.flashcard} className="glass-card card-hover">
+        <div style={styles.flashcard}>
             <div style={styles.flashcardIcon}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" strokeWidth="2">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="17 8 12 3 7 8" />
                     <line x1="12" y1="3" x2="12" y2="15" />
@@ -74,8 +77,10 @@ export default function UploadCard({
                 disabled={isUploading || isRecording}
                 style={styles.secondaryButton}
             >
-                {isUploading ? 'Uploading...' : 'Choose File'}
+                {isUploading ? `Uploading... ${uploadProgress}%` : 'Choose File'}
             </button>
+
+            {isUploading && <UploadProgressBar percent={uploadProgress} />}
         </div>
     );
 }

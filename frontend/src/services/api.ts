@@ -53,12 +53,20 @@ export interface JobResult extends AudioJob {
 
 // Audio API
 export const audioApi = {
-    // Upload audio file
-    upload: async (file: File): Promise<{ jobId: string; status: string }> => {
+    // Upload audio file. onProgress reports 0-100 upload percentage.
+    upload: async (
+        file: File,
+        onProgress?: (percent: number) => void
+    ): Promise<{ jobId: string; status: string }> => {
         const formData = new FormData();
         formData.append('audio', file);
         const response = await api.post('/audio/upload', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
+            onUploadProgress: (e) => {
+                if (onProgress && e.total) {
+                    onProgress(Math.round((e.loaded / e.total) * 100));
+                }
+            },
         });
         return response.data;
     },

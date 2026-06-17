@@ -13,13 +13,13 @@ export default function ResultPanel({ job, onClose }: ResultPanelProps) {
     if (!job.summary) return null;
 
     return (
-        <section style={styles.resultSection} className="glass-card celebrate">
+        <section style={styles.resultSection} className="animate-fade-in">
             <div style={styles.resultHeader}>
-                <h2 style={styles.resultTitle} className="gradient-text">
+                <h2 style={styles.resultTitle}>
                     {job.summary.title}
                 </h2>
                 <button onClick={onClose} style={styles.closeButton}>
-                    ✕
+                    Close
                 </button>
             </div>
             <p style={styles.resultFilename}>
@@ -39,6 +39,7 @@ export default function ResultPanel({ job, onClose }: ResultPanelProps) {
                     <ul style={styles.list}>
                         {job.summary.keyPoints.map((point, i) => (
                             <li key={i} style={styles.listItem}>
+                                <span style={{ color: 'var(--color-text-muted)' }}>—</span>
                                 {point}
                             </li>
                         ))}
@@ -52,7 +53,8 @@ export default function ResultPanel({ job, onClose }: ResultPanelProps) {
                     <ul style={styles.list}>
                         {job.summary.actionItems.map((item, i) => (
                             <li key={i} style={styles.listItem}>
-                                ☐ {item}
+                                <span style={{ color: 'var(--color-accent)' }}>☐</span>
+                                {item}
                             </li>
                         ))}
                     </ul>

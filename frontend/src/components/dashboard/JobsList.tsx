@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { dashboardStyles as styles, statusStyles } from './styles';
 import type { AudioJob } from '../../services/api';
 
@@ -28,10 +28,21 @@ export default function JobsList({
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const paginatedJobs = jobs.slice(startIndex, endIndex);
 
-    // Reset to page 1 if current page exceeds total (e.g., after deletion)
-    if (currentPage > totalPages && totalPages > 0) {
-        setCurrentPage(totalPages);
-    }
+    // Clamp current page if it exceeds total (e.g., after deletion).
+    // Done in an effect so we never call setState during render.
+    useEffect(() => {
+        if (currentPage > totalPages && totalPages > 0) {
+            setCurrentPage(totalPages);
+        }
+    }, [currentPage, totalPages]);
+
+    const statusLabel: Record<AudioJob['status'], string> = {
+        pending: 'Queued',
+        uploaded: 'Uploaded',
+        processing: 'Transcribing',
+        completed: 'Complete',
+        failed: 'Failed',
+    };
 
     const getStatusBadge = (status: AudioJob['status']) => {
         const isProcessing = status === 'pending' || status === 'uploaded' || status === 'processing';
@@ -40,7 +51,7 @@ export default function JobsList({
                 style={{ ...styles.badge, ...statusStyles[status] }}
                 className={isProcessing ? 'badge-processing' : ''}
             >
-                {status.toUpperCase()}
+                {isProcessing && <span className="caret-blink">·</span>} {statusLabel[status]}
             </span>
         );
     };
@@ -56,37 +67,38 @@ export default function JobsList({
     return (
         <section style={styles.notesSection}>
             <div style={paginationStyles.header}>
-                <h2 style={styles.sectionTitle}>Your Voice Notes</h2>
+                <h2 style={styles.sectionTitle}>Notes</h2>
                 {jobs.length > 0 && (
                     <span style={paginationStyles.count}>
-                        {jobs.length} note{jobs.length !== 1 ? 's' : ''}
+                        {String(jobs.length).padStart(2, '0')} total
                     </span>
                 )}
             </div>
 
             {isLoading ? (
                 <div style={styles.emptyState}>
-                    <div style={styles.emptyIcon}>⏳</div>
-                    <p style={styles.emptyDescription}>Loading...</p>
+                    <p style={styles.emptyDescription}>Loading…</p>
                 </div>
             ) : jobs.length === 0 ? (
                 <div style={styles.emptyState}>
-                    <div style={styles.emptyIcon}>📝</div>
-                    <h3 style={styles.emptyTitle}>No voice notes yet</h3>
+                    <h3 style={styles.emptyTitle}>No notes yet</h3>
                     <p style={styles.emptyDescription}>
-                        Upload an audio file to get started.
+                        Record or upload audio to get started.
                     </p>
                 </div>
             ) : (
                 <>
                     <div style={styles.jobsList}>
-                        {paginatedJobs.map((job) => (
+                        {paginatedJobs.map((job, index) => (
                             <div
                                 key={job.jobId}
                                 style={styles.jobCard}
-                                className="glass-card card-hover"
+                                className="card-hover"
                             >
                                 <div style={styles.jobInfo}>
+                                    <span style={styles.jobIndex}>
+                                        {String(startIndex + index + 1).padStart(2, '0')}
+                                    </span>
                                     <span style={styles.jobFilename}>
                                         {job.summary?.title || job.originalFilename}
                                     </span>
@@ -101,7 +113,6 @@ export default function JobsList({
                                             <button
                                                 onClick={() => onViewResult(job.jobId)}
                                                 style={styles.viewBtn}
-                                                className="btn-glow"
                                             >
                                                 View
                                             </button>
@@ -110,12 +121,12 @@ export default function JobsList({
                                             onClick={() => onDeleteJob(job.jobId)}
                                             style={styles.deleteBtn}
                                         >
-                                            🗑
+                                            Delete
                                         </button>
                                     </div>
                                 </div>
                                 {job.status === 'failed' && job.error && (
-                                    <p style={styles.jobError}>Error: {job.error}</p>
+                                    <p style={styles.jobError}>{job.error}</p>
                                 )}
                             </div>
                         ))}
@@ -135,7 +146,7 @@ export default function JobsList({
                                 ← Prev
                             </button>
                             <span style={paginationStyles.pageInfo}>
-                                Page {currentPage} of {totalPages}
+                                {String(currentPage).padStart(2, '0')} / {String(totalPages).padStart(2, '0')}
                             </span>
                             <button
                                 onClick={handleNextPage}
@@ -160,35 +171,40 @@ const paginationStyles: { [key: string]: React.CSSProperties } = {
     header: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '1rem',
+        alignItems: 'baseline',
+        marginBottom: '1.25rem',
     },
     count: {
-        fontSize: '0.875rem',
-        color: 'var(--color-text-secondary)',
+        fontSize: '0.6875rem',
+        fontFamily: 'var(--font-mono)',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        color: 'var(--color-text-muted)',
     },
     container: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         gap: '1rem',
         marginTop: '1.5rem',
-        paddingTop: '1rem',
-        borderTop: '1px solid var(--color-border)',
     },
     button: {
-        padding: '0.5rem 1rem',
-        backgroundColor: 'var(--color-bg-card)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '8px',
+        padding: 0,
+        backgroundColor: 'transparent',
+        border: 'none',
         color: 'var(--color-text-primary)',
-        fontSize: '0.875rem',
+        fontSize: '0.75rem',
+        fontFamily: 'var(--font-mono)',
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
         fontWeight: 500,
         cursor: 'pointer',
-        transition: 'all 0.2s',
+        transition: 'opacity 0.16s',
     },
     pageInfo: {
-        fontSize: '0.875rem',
-        color: 'var(--color-text-secondary)',
+        fontSize: '0.75rem',
+        fontFamily: 'var(--font-mono)',
+        letterSpacing: '0.06em',
+        color: 'var(--color-text-muted)',
     },
 };

@@ -27,6 +27,7 @@ export default function Dashboard() {
 
     // Upload state
     const [isUploading, setIsUploading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
     const [uploadError, setUploadError] = useState<string | null>(null);
 
     // Selected job for viewing
@@ -82,10 +83,11 @@ export default function Dashboard() {
         if (!file) return;
 
         setIsUploading(true);
+        setUploadProgress(0);
         setUploadError(null);
 
         try {
-            const result = await audioApi.upload(file);
+            const result = await audioApi.upload(file, setUploadProgress);
             setJobs((prev) => [
                 {
                     jobId: result.jobId,
@@ -101,16 +103,18 @@ export default function Dashboard() {
             setUploadError(err instanceof Error ? err.message : 'Upload failed');
         } finally {
             setIsUploading(false);
+            setUploadProgress(0);
         }
     };
 
     // Handle file upload (from UploadCard)
     const handleFileUpload = async (file: File) => {
         setIsUploading(true);
+        setUploadProgress(0);
         setUploadError(null);
 
         try {
-            const result = await audioApi.upload(file);
+            const result = await audioApi.upload(file, setUploadProgress);
             // Add new job to top of list
             setJobs((prev) => [
                 {
@@ -126,6 +130,7 @@ export default function Dashboard() {
             setUploadError(err instanceof Error ? err.message : 'Upload failed');
         } finally {
             setIsUploading(false);
+            setUploadProgress(0);
         }
     };
 
@@ -144,6 +149,7 @@ export default function Dashboard() {
             }
         } catch (err) {
             console.error('Failed to delete:', err);
+            setUploadError(err instanceof Error ? err.message : 'Failed to delete voice note');
         }
     };
 
@@ -153,6 +159,7 @@ export default function Dashboard() {
             setSelectedJob(result);
         } catch (err) {
             console.error('Failed to get result:', err);
+            setUploadError(err instanceof Error ? err.message : 'Failed to load result');
         }
     };
 
@@ -178,6 +185,7 @@ export default function Dashboard() {
                             audioBlob={recorder.audioBlob}
                             duration={recorder.duration}
                             isUploading={isUploading}
+                            uploadProgress={uploadProgress}
                             onStartRecording={recorder.startRecording}
                             onStopRecording={recorder.stopRecording}
                             onSendRecording={handleRecordingUpload}
@@ -187,6 +195,7 @@ export default function Dashboard() {
                         {/* Upload Card */}
                         <UploadCard
                             isUploading={isUploading}
+                            uploadProgress={uploadProgress}
                             isRecording={recorder.isRecording}
                             onFileSelect={handleFileUpload}
                             onValidationError={handleValidationError}

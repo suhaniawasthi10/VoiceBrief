@@ -29,26 +29,14 @@ export default function Signup() {
     return (
         <div style={styles.container}>
             <div style={styles.card}>
-                <Link to="/" style={styles.backLink}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                    Back
-                </Link>
+                <Link to="/" style={styles.backLink}>← Back</Link>
                 <div style={styles.header}>
                     <Link to="/" style={styles.logo}>
-                        <span style={styles.logoIcon}>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" strokeWidth="2">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                                <line x1="12" y1="19" x2="12" y2="23" />
-                                <line x1="8" y1="23" x2="16" y2="23" />
-                            </svg>
-                        </span>
                         <span style={styles.logoText}>VoiceBrief</span>
+                        <span style={styles.logoDot}>.</span>
                     </Link>
                     <h1 style={styles.title}>Create your account</h1>
-                    <p style={styles.subtitle}>Start transforming your voice notes today</p>
+                    <p style={styles.subtitle}>Start summarizing your voice notes.</p>
                 </div>
 
                 {error && <div style={styles.error}>{error}</div>}
@@ -93,15 +81,13 @@ export default function Signup() {
                     </div>
 
                     <button type="submit" style={styles.button} disabled={isLoading}>
-                        {isLoading ? 'Creating account...' : 'Create Account'}
+                        {isLoading ? 'Creating account…' : 'Create account'}
                     </button>
                 </form>
 
                 <p style={styles.footer}>
                     Already have an account?{' '}
-                    <Link to="/login" style={styles.link}>
-                        Sign in
-                    </Link>
+                    <Link to="/login" style={styles.link}>Sign in</Link>
                 </p>
             </div>
         </div>
@@ -115,46 +101,38 @@ const styles: { [key: string]: React.CSSProperties } = {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem',
-        background: 'radial-gradient(ellipse at top, rgba(20, 184, 166, 0.08) 0%, transparent 50%)',
+        backgroundColor: 'var(--color-bg-primary)',
     },
     card: {
         width: '100%',
-        maxWidth: '420px',
-        backgroundColor: 'var(--color-bg-card)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '24px',
-        padding: '3rem',
+        maxWidth: '360px',
     },
     header: {
-        textAlign: 'center' as const,
-        marginBottom: '2rem',
+        textAlign: 'left' as const,
+        marginBottom: '2.5rem',
     },
     logo: {
         display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        textDecoration: 'none',
-        marginBottom: '1.5rem',
-    },
-    logoIcon: {
-        width: '36px',
-        height: '36px',
-        borderRadius: '50%',
-        backgroundColor: 'rgba(20, 184, 166, 0.15)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'baseline',
+        gap: '0.2rem',
+        marginBottom: '2.5rem',
     },
     logoText: {
-        fontSize: '1.25rem',
+        fontSize: '1.0625rem',
         fontWeight: 700,
+        letterSpacing: '-0.02em',
         color: 'var(--color-text-primary)',
+    },
+    logoDot: {
+        color: 'var(--color-accent)',
+        fontWeight: 700,
     },
     title: {
         fontSize: '1.75rem',
         fontWeight: 700,
+        letterSpacing: '-0.02em',
         color: 'var(--color-text-primary)',
-        marginBottom: '0.5rem',
+        marginBottom: '0.375rem',
     },
     subtitle: {
         color: 'var(--color-text-secondary)',
@@ -163,7 +141,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     form: {
         display: 'flex',
         flexDirection: 'column' as const,
-        gap: '1.25rem',
+        gap: '1.5rem',
     },
     inputGroup: {
         display: 'flex',
@@ -171,60 +149,67 @@ const styles: { [key: string]: React.CSSProperties } = {
         gap: '0.5rem',
     },
     label: {
-        fontSize: '0.875rem',
+        fontSize: '0.6875rem',
         fontWeight: 500,
-        color: 'var(--color-text-secondary)',
+        fontFamily: 'var(--font-mono)',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        color: 'var(--color-text-muted)',
     },
     input: {
-        padding: '0.875rem 1rem',
-        backgroundColor: 'var(--color-bg-secondary)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '12px',
+        padding: '0.625rem 0',
+        backgroundColor: 'transparent',
+        border: 'none',
+        borderBottom: '1px solid var(--color-border)',
+        borderRadius: 0,
         fontSize: '1rem',
         color: 'var(--color-text-primary)',
         outline: 'none',
-        transition: 'border-color 0.2s',
+        transition: 'border-color 0.16s',
     },
     button: {
-        padding: '1rem',
-        background: 'linear-gradient(135deg, #14b8a6, #0d9488)',
+        padding: '0.875rem',
+        backgroundColor: 'var(--color-text-primary)',
         color: '#fff',
-        fontSize: '1rem',
+        fontSize: '0.875rem',
         fontWeight: 600,
-        borderRadius: '12px',
+        border: '1px solid var(--color-text-primary)',
+        borderRadius: 'var(--radius)',
         marginTop: '0.5rem',
-        boxShadow: '0 4px 15px rgba(20, 184, 166, 0.25)',
-        transition: 'transform 0.2s',
+        cursor: 'pointer',
+        transition: 'background-color 0.16s',
     },
     error: {
-        padding: '0.875rem 1rem',
-        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-        border: '1px solid rgba(239, 68, 68, 0.3)',
-        borderRadius: '12px',
-        color: '#ef4444',
-        fontSize: '0.875rem',
-        marginBottom: '1rem',
-        textAlign: 'center' as const,
+        padding: '0.75rem 0',
+        borderTop: '1px solid var(--color-error)',
+        borderBottom: '1px solid var(--color-error)',
+        color: 'var(--color-error)',
+        fontSize: '0.8125rem',
+        fontFamily: 'var(--font-mono)',
+        marginBottom: '1.5rem',
+        textAlign: 'left' as const,
     },
     footer: {
-        textAlign: 'center' as const,
-        marginTop: '2rem',
+        textAlign: 'left' as const,
+        marginTop: '2.5rem',
+        paddingTop: '1.5rem',
+        borderTop: '1px solid var(--color-border)',
         color: 'var(--color-text-secondary)',
-        fontSize: '0.9375rem',
+        fontSize: '0.875rem',
     },
     link: {
-        color: '#14b8a6',
-        fontWeight: 500,
+        color: 'var(--color-accent)',
+        fontWeight: 600,
         textDecoration: 'none',
     },
     backLink: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        color: 'var(--color-text-secondary)',
+        display: 'inline-block',
+        color: 'var(--color-text-muted)',
         textDecoration: 'none',
-        fontSize: '0.875rem',
-        marginBottom: '1.5rem',
-        transition: 'color 0.2s',
+        fontSize: '0.75rem',
+        fontFamily: 'var(--font-mono)',
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
+        marginBottom: '2.5rem',
     },
 };
